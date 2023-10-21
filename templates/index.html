@@ -1,0 +1,36 @@
+<!-- display users interests and hearted/favourited course recommendations -->
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+    <div class="header_container">
+        <h1 id="hello"> Hello, {{ name }} </h1>
+        <div class="intro">
+            <p class="marks">“</p>
+            <p>Education is the most powerful weapon which you can use to change the world</p>
+            <p class="marks">”</p>
+        </div>
+    </div>
+    <div class="container-allignment">
+        <div class="left">
+            <h2 class="container_h">Your Interests</h2>
+            {% for interest in interests %}
+                <h3 class="container_t_l" > {{interest}} </h3>
+            {% endfor %}
+        </div>
+        <div class="right">
+            <h2 class="container_h">Your Courses</h2>
+            {% for course in fave_courses %}
+                <div class="container_t_r">
+                    <h3 class="header_t_r" > {{course.title}}</h3>
+                    <h4> {{course.institution}}</h4>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

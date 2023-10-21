@@ -1,0 +1,33 @@
+<!-- display users course recommendations -->
+{% extends "layout.html" %}
+
+{% block title %}
+    Recommendations
+{% endblock %}
+
+{% block main %}
+    <h1 class="fw-bold"> Your Recommendations </h1>
+    <form action="/recommendations" method="post">
+        <select class="form-select form-select-lg mb-3" id="select-form" name="selected_level">
+            <option value="" disabled selected> Difficulty </option>
+            {% for level in levels %}
+                <option value="{{level.level}}"> {{level.level}} </option>
+            {% endfor %}
+        </select>
+    </form>
+    {% for course_list in courses %}
+        {% for course in course_list %}
+            <div id="outline-card">
+                <h2>
+                    <i id="heart" class="{% if course.course_id in liked_course_id %}fa{% else %}fa-regular{% endif %} fa-heart" data-course-id="{{ course.course_id }}"></i>
+                    {{ course.title }}
+                </h2>
+                <h4> {{ course.institution }} </h4>
+                <p> {{ course.description }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+
+
+{% endblock %}

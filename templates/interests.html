@@ -1,0 +1,41 @@
+<!-- allow users to select what their interests are -->
+{% extends "layout.html" %}
+
+{% block title %}
+    Interests
+{% endblock %}
+
+{% block main %}
+    <div>
+        <h1 class="fw-bold"> All Interests </h1>
+        <p> Select new interests from the list below to add them to your user profile and access new course recommendations </p>
+    </div>
+    <div>
+        <form action="/interests" method="post">
+            {% for tag in tags %}
+                <label class="btn btn-outline-dark" id="label-select-{{tag.original}}">
+                    <input type="checkbox" name="select" value="{{tag.original}}" autocomplete="off" id="select-{{tag.original}}">
+                    {{tag.formatted}}
+                </label>
+            {% endfor %}
+        </div>
+        <div>
+            <h1 class="fw-bold"> Your Current Interests </h1>
+            <p> You can deselect any of your current interests to update your course recommendations </p>
+        </div>
+        <div>
+            {% for interest in user_interests %}
+                <label class="btn btn-outline-dark" id="label-deselect-{{interest.original}}">
+                    <input type="checkbox" name="deselect" value="{{interest.original}}" autocomplete="off" id="deselect-{{interest.original}}">
+                    {{interest.formatted}}
+                </label>
+            {% endfor %}
+        </div>
+        <div id="submit_button">
+            <button class="btn btn-dark btn-lg" type="submit">Submit</button>
+        </div>
+
+    </form>
+
+
+{% endblock %}

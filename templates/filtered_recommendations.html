@@ -1,0 +1,29 @@
+<!-- display users course recommendations -->
+{% extends "layout.html" %}
+
+{% block title %}
+    Recommendations
+{% endblock %}
+
+{% block main %}
+    <h1> Your {{ selected_level }} Level Recommendations </h1>
+
+    {% if no_courses %}
+        <h2 class="error"> Unfortunately, there are no {{selected_level}} courses in the database at the moment :( </h2>
+    {% else %}
+        {% set printed_courses = [] %}
+        {% for course_list in levelled_courses %}
+            {% for course in course_list %}
+                {%  if course.course_id not in printed_courses %}
+                    <div id="outline-card">
+                        <h2><i id="heart" class="{% if course.course_id in liked_course_id %}fa{% else %}fa-regular{% endif %} fa-heart" data-course-id="{{ course.course_id }}"></i>{{ course.title }} </h2>
+                        <h4> {{ course.institution }} </h4>
+                        <p> {{ course.description }}</p>
+                    </div>
+                    {% set printed_courses = printed_courses.append(course.course_id) %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
